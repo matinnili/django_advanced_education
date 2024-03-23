@@ -13,7 +13,7 @@ class Usermanager(BaseUserManager):
         user.set_password(password)
         user.save()
         return user
-    def create_superuser(self,email,passwords,**extra_fields):
+    def create_superuser(self,email,password,**extra_fields):
         extra_fields.setdefault("is_staff",True)
         extra_fields.setdefault("is_superuser",True)
         extra_fields.setdefault("is_active",True)
@@ -21,7 +21,7 @@ class Usermanager(BaseUserManager):
             raise ValueError(_('is_staff must be True'))
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(_('is_superuser must be True'))
-        return self.create_user(email,passwords,**extra_fields)
+        return self.create_user(email,password,**extra_fields)
         
 
 class User(AbstractBaseUser,PermissionsMixin):
@@ -35,9 +35,20 @@ class User(AbstractBaseUser,PermissionsMixin):
     created_date=models.DateTimeField(auto_now_add=True)
     updated_date=models.DateField(auto_now=True)
     first_name=models.CharField(max_length=250)
+    USERNAME_FIELD="email"
     REQUIRED_FIELDS=[]
     objects=Usermanager()
     
     def __str__(self):
         
        return self.email
+class Profile(models.Model):
+    user= models.ForeignKey(User,on_delete=models.CASCADE)
+    first_name=models.CharField(max_length=250)
+    last_name=models.CharField(max_length=250)
+    image=models.ImageField(blank=True,null=True)
+    description=models.TextField()
+    created_date=models.DateTimeField(auto_now_add=True)
+    updated_date=models.DateField(auto_now=True)
+    def __str__(self):
+        return self.user.email
