@@ -1,5 +1,12 @@
 {
     "cSpell.words": [
         "Refirecttomaktab"
-    ]
+    ],
+    "python.pythonPath": "/usr/bin/python3.12",
+    "python.analysis.inlayHints.callArgumentNames": "all",
+    "python.analysis.inlayHints.functionReturnTypes": false,
+    "python.analysis.inlayHints.pytestParameters": false,
+    "python.analysis.inlayHints.variableTypes": false,
+    "editor.defaultFormatter": "ms-python.vscode-pylance",
+    "python.defaultInterpreterPath": "python3.12"
 }

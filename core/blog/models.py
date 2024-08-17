@@ -25,3 +25,6 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+    
+    def get_snippet(self):
+        return self.content[0:5]
